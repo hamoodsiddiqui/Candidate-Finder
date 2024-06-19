@@ -1,25 +1,29 @@
-// models/formData.js
-
 module.exports = (sequelize, DataTypes) => {
-    const formData = sequelize.define('formData', {
-      age: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      location: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      qualification: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      additionalQualification: {
-        type: DataTypes.STRING,
-        allowNull: true
-      }
+  const formdata = sequelize.define("formdata", {
+    age: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    domicile: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    qualification: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    additionalQualification: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+  });
+
+  formdata.associate = (models) => {
+    formdata.belongsTo(models.users, {
+      foreignKey: "userId", // Foreign key in theformdata table
+      onDelete: "CASCADE",
     });
-     
-    return formData;
   };
-  
+
+  return formdata;
+};

@@ -1,14 +1,14 @@
 // tailwind.config.js
 
 module.exports = {
-  content: ['./*/*.html', ],
+  content: ["./*/*/*.html"],
   theme: {
     extend: {
       height: {
-        '3/10': '30%',
-        '7/10': '70%',
-      }
+        "3/10": "30%",
+        "7/10": "70%",
+      },
     },
   },
   plugins: [],
-}
+};

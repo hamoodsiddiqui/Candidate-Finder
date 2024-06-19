@@ -1,8 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const formDataController = require('../controllers/formDataController');
+const formDataController = require("../controllers/formDataController");
 
-// POST /api/formdata/submit
-router.post('/submit', function(req,res){formDataController.submitFormData});
+// POST /formdata/submit
+router.post("/submit", function (req, res) {
+  formDataController.submitFormData;
+});
 
 module.exports = router;
