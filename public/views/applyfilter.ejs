@@ -1,0 +1,113 @@
+<!-- filterForm.ejs -->
+<div class="bg-white flex justify-center items-center">
+  <a href="/users/admin/getUsers"
+    >See Unfiltered Results (See All Candidates)</a
+  >
+  <form
+    id="filterForm"
+    action="/users/admin/apply-filter"
+    method="POST"
+    class="w-full max-w-4xl"
+  >
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2"
+        >Select Qualification</label
+      >
+      <div
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      >
+        <label>
+          <input type="checkbox" name="qualification[]" value="Matric" /> Matric
+        </label>
+        <label>
+          <input type="checkbox" name="qualification[]" value="Intermediate" />
+          Intermediate
+        </label>
+        <label>
+          <input type="checkbox" name="qualification[]" value="Bachelors" />
+          Bachelors
+        </label>
+        <label>
+          <input type="checkbox" name="qualification[]" value="Masters" />
+          Masters
+        </label>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2"
+        >Additional Qualification</label
+      >
+      <div
+        id="additionalQualificationContainer"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      >
+        <!-- Checkboxes will be populated here by JavaScript -->
+      </div>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="filter-btn">Apply Filter</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // JavaScript to populate additional qualification based on qualification checkboxes
+  const qualificationCheckboxes = document.querySelectorAll(
+    'input[name="qualification[]"]'
+  );
+  const additionalQualContainer = document.getElementById(
+    "additionalQualificationContainer"
+  );
+
+  const qualificationsMap = {
+    Bachelors: [
+      "Accounting",
+      "Finance",
+      "Marketing",
+      "Computer Science",
+      "Software Engineering",
+      "Data Science",
+      "Artificial Intelligence",
+      "Cyber Security",
+    ],
+    Masters: [
+      "Finance",
+      "Marketing",
+      "Computer Science",
+      "Software Engineering",
+      "Data Science",
+      "Artificial Intelligence",
+      "Cyber Security",
+      "Computer Vision",
+    ],
+  };
+
+  qualificationCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      // Clear existing checkboxes
+      additionalQualContainer.innerHTML = "";
+
+      // Get selected qualifications
+      const selectedQualifications = Array.from(qualificationCheckboxes)
+        .filter((checkbox) => checkbox.checked)
+        .map((checkbox) => checkbox.value);
+
+      // Populate additional qualifications based on selected qualifications
+      const addedQualifications = new Set();
+      selectedQualifications.forEach((selectedQualification) => {
+        if (qualificationsMap[selectedQualification]) {
+          qualificationsMap[selectedQualification].forEach((qual) => {
+            if (!addedQualifications.has(qual)) {
+              addedQualifications.add(qual);
+              const label = document.createElement("label");
+              label.innerHTML = `
+                <input type="checkbox" name="additionalQualification[]" value="${qual}"> ${qual}
+              `;
+              additionalQualContainer.appendChild(label);
+            }
+          });
+        }
+      });
+    });
+  });
+</script>

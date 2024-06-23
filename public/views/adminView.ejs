@@ -1,0 +1,90 @@
+<%- include('applyfilter') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link href="../output.css" rel="stylesheet" />
+    <style>
+      .table-container {
+        margin: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+      .send-email-btn {
+        background-color: #4caf50;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body class="h-screen">
+    <div class="h-full">
+      <!-- Header -->
+      <div class="bg-green-500 h-16 flex justify-center items-center">
+        <h1 class="text-white text-center text-3xl">Admin Dashboard</h1>
+      </div>
+      <!-- Table Container -->
+      <div class="bg-white flex justify-center items-center h-full">
+        <div class="table-container w-full max-w-4xl">
+          <table>
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>PDF File</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% formData.forEach(data => { %>
+              <tr>
+                <td><%= data.user.username %></td>
+                <td><%= data.user.email %></td>
+                <td>
+                  <a href="/uploads/<%= data.filePath %>" target="_blank"
+                    >Open PDF</a
+                  >
+                </td>
+                <td>
+                  <form action="/users/admin/send-email" method="POST">
+                    <input
+                      type="hidden"
+                      name="email"
+                      value="<%= data.user.email %>"
+                    />
+                    <button class="send-email-btn">Send Email</button>
+                  </form>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

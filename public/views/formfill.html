@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Upload</title>
+    <link href="../output.css" rel="stylesheet" />
+  </head>
+  <body class="h-screen">
+    <div class="h-full flex justify-center items-center">
+      <!-- Top 30% Green -->
+      <div class="bg-green-500 w-full h-3/10 flex justify-center items-center">
+        <h1 class="text-white text-center text-3xl py-4">Upload Your Resume</h1>
+      </div>
+      <!-- Bottom 70% White -->
+      <div class="bg-white w-full h-7/10 flex justify-center items-center">
+        <div class="w-full max-w-md">
+          <div class="bg-gray-100 p-8 rounded shadow-md transition">
+            <!-- File Upload Form -->
+            <form
+              id="uploadForm"
+              action="/formdata/upload"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              <h2 class="text-center text-2xl mb-4">Upload File</h2>
+              <div class="mb-4">
+                <input
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="fileInput"
+                  name="filePath"
+                  type="file"
+                  accept=".pdf"
+                  required
+                />
+              </div>
+              <div class="text-center">
+                <button
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  Upload
+                </button>
+              </div>
+              <div id="uploadResult"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,6 +1,7 @@
 // models/users.js
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
+const { toDefaultValue } = require("sequelize/lib/utils");
 
 module.exports = (sequelize, DataTypes) => {
   const users = sequelize.define("users", {
@@ -16,6 +17,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+    },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      DefaultValue: "candidate",
+    },
+    qualification: {
+      type: DataTypes.STRING,
+      DefaultValue: "None",
+    },
+    additionalQualification: {
+      type: DataTypes.STRING,
+      DefaultValue: "None",
     },
   });
 

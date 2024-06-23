@@ -1,0 +1,112 @@
+<!-- qualificationForm.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Qualification Form</title>
+    <link href="../output.css" rel="stylesheet" />
+    <style>
+      .hidden {
+        display: none;
+      }
+      .show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body class="h-screen">
+    <div class="h-full flex justify-center items-center">
+      <div class="w-full max-w-md">
+        <form
+          id="qualificationForm"
+          action="/users/submit-qualification"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2"
+              >Select Qualification</label
+            >
+            <select
+              id="qualification"
+              name="qualification"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            >
+              <option value="">Select Qualification</option>
+              <option value="Matric">Matric</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Bachelors">Bachelors</option>
+              <option value="Masters">Masters</option>
+            </select>
+          </div>
+          <div id="additionalQualification" class="mb-4 hidden">
+            <label class="block text-gray-700 text-sm font-bold mb-2"
+              >Additional Qualification</label
+            >
+            <select
+              id="additionalQual"
+              name="additionalQualification"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            >
+              <option value="">Select Additional Qualification</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <button
+              type="submit"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const qualificationSelect = document.getElementById("qualification");
+      const additionalQualDiv = document.getElementById(
+        "additionalQualification"
+      );
+      const additionalQualSelect = document.getElementById("additionalQual");
+
+      qualificationSelect.addEventListener("change", () => {
+        const selectedQualification = qualificationSelect.value;
+
+        if (selectedQualification === "Bachelors") {
+          additionalQualDiv.classList.remove("hidden");
+          additionalQualSelect.innerHTML = `
+                    <option value="">Select Additional Qualification</option>
+                    <option value="Accounting">Accounting</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Software Engineering">Software Engineering</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Cyber Security">Cyber Security</option>
+                `;
+        } else if (selectedQualification === "Masters") {
+          additionalQualDiv.classList.remove("hidden");
+          additionalQualSelect.innerHTML = `
+                    <option value="">Select Additional Qualification</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Software Engineering">Software Engineering</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Cyber Security">Cyber Security</option>
+                    <option value="Computer Vision">Computer Vision</option>
+                `;
+        } else {
+          additionalQualDiv.classList.add("hidden");
+          additionalQualSelect.innerHTML = `<option value="">Select Additional Qualification</option>`;
+        }
+      });
+    </script>
+  </body>
+</html>
