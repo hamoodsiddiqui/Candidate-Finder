@@ -1,4 +1,4 @@
-# Candidate Checker
+# Candidate Finder
 
 Candidate Checker is a web application that allows administrators to filter and view candidates based on required qualifications. It provides an admin dashboard where administrators can see all candidates or apply specific filters to narrow down the list of candidates. The filtered results can then be used to send emails to selected candidates.
 
